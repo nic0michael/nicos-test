@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts :: header">
+  <title>Nicos App</title>
+</head>
+<body>
+	<nav th:replace="layouts :: navbarNicosThing"></nav>
+	<div sec:authorize="hasAnyRole('MANAGER','TEAMMEMBER','ADMIN')">
+
+
+
+		<br>
+		<div class="container">
+
+			<H3>Edit Nicos Thing</H3>
+			<br>
+			<br>
+			<form th:action="@{/nicos-app/nicosthings/update}" th:object="${nicosThingsRequest}" method="POST">
+
+				<!--  This will be used to bind to the task that was clicked on (USED FOR UPDATES)-->
+
+				<input type="hidden" th:field="${nicosThingsRequest.dateCreated}" />
+				<input type="hidden" th:field="${nicosThingsRequest.nicosThingId}" />
+
+				
+				<b>Date created:</b>
+				<div class="form-group row" th:text="${nicosThingsRequest.dateCreated}"></div>
+				
+				
+				<b>Customer Id:</b>
+				<div class="form-group row" th:text="${nicosThingsRequest.nicosThingId}"></div>
+				
+				<div class="form-group row">
+					<input type="text" placeholder="Customer Name"
+						th:field="${nicosThingsRequest.name}">
+				</div>
+
+
+
+				<div class="form-group row">
+					<input type="text" placeholder="Cell Phone"
+						th:field="${nicosThingsRequest.cellPhone}">
+				</div>
+				
+				
+				<div class="form-group row">
+					<input type="text" placeholder="Email Address"
+						th:field="${nicosThingsRequest.emailAddress}">
+				</div>
+				
+			
+			
+
+				<div class="form-group row">
+					<button class="btn btn-info col-2" type="submit">Save Nicos thing</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+</body>
+
+</html>
